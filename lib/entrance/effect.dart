@@ -11,13 +11,13 @@ Effect<EntranceState> buildEffect() {
     EntranceAction.action: _onAction,
     EntranceAction.openGrid: _onOpenGrid,
     EntranceAction.onRefreshUp: _onRefreshUp,
+    EntranceAction.toSecondPage: _toSecondPage,
   });
 }
 
 void _onAction(Action action, Context<EntranceState> ctx) {}
 
 void _onOpenGrid(Action action, Context<EntranceState> ctx) {
-  print(action.payload);
   Navigator.of(ctx.context)
       .pushNamed(
       'grid_page',
@@ -48,5 +48,9 @@ void _scrollController(Action action, Context<EntranceState> ctx) {
        });
     }
   });
+}
+
+void _toSecondPage(Action action, Context<EntranceState> ctx) {
+  Navigator.of(ctx.context).pushNamed('second_page', arguments: null);
 }
 

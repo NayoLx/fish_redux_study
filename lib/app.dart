@@ -10,6 +10,7 @@ Widget CreateApp() {
     pages: <String, Page<Object, dynamic>>{
       'entrance_page': EntrancePage(),
       'grid_page': GridPage(),
+      'second_page': SecondPage(),
     },
   );
 

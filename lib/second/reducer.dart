@@ -6,15 +6,12 @@ import 'state.dart';
 Reducer<SecondState> buildReducer() {
   return asReducer(
     <Object, Reducer<SecondState>>{
-      SecondAction.modify: _modify,
+      SecondAction.onAcion: _onAction,
     },
   );
 }
 
-SecondState _modify(SecondState state, Action action) {
-  final modifyFunc=action.payload as void Function(SecondState clone);
-  final clone = state.clone();
-  modifyFunc(clone);
-  assert(state.hashCode != clone.hashCode); //不能是相同的对象
-  return clone;
+SecondState _onAction(SecondState state, Action action) {
+  final SecondState newState = state.clone();
+  return newState;
 }

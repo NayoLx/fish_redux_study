@@ -43,4 +43,8 @@ class EntranceActionCreator {
     return Action(EntranceAction.onEditAction, payload: toValue);
   }
 
+  static Action toSecondPage() {
+    return Action(EntranceAction.toSecondPage);
+  }
+
 }

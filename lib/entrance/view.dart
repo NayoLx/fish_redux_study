@@ -124,7 +124,12 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
                  },
              ),
           ),
-          Icon(Icons.directions_bike),
+          new GestureDetector(
+            onTap: () {
+              dispatch(EntranceActionCreator.toSecondPage());
+            },
+            child: Icon(Icons.delete_sweep),
+          ),
           Icon(Icons.directions_bike),
           Icon(Icons.directions_bike),
         ],
