@@ -57,8 +57,8 @@ class EntranceActionCreator {
   }
 
   //路由弹窗
-  static Action onRouteToast() {
-    return Action(EntranceAction.onRouteToast);
+  static Action onRouteToast(int id, int price) {
+    return Action(EntranceAction.onRouteToast,  payload: {'id': id, 'price': price});
   }
 
 

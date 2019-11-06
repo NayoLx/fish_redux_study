@@ -59,6 +59,7 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
                                            new GestureDetector(
                                              onTap: () {
                                                dispatch(EntranceActionCreator.showToast(i, state.shopList[i]?.price));
+//                                               dispatch(EntranceActionCreator.onRouteToast(i, state.shopList[i]?.price));
                                              },
                                              child: new Text('￥${state.shopList[i]?.price}'),
                                            )

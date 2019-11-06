@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/material.dart' as prefix0;
 import 'action.dart';
 import 'state.dart';
 
@@ -58,10 +59,81 @@ void _toSecondPage(Action action, Context<EntranceState> ctx) {
   Navigator.of(ctx.context).pushNamed('second_page', arguments: null);
 }
 
-
 //路由弹窗
-void _onRouteToast(Action action, Context<EntranceState> ctx) {
+void _onRouteToast(Action action, Context<EntranceState> ctx) async {
+  await Navigator.push(
+      ctx.context,
+      PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return Center(
+            child: GestureDetector(
+              onTap: () {
+                _onRouteTextToast(action, ctx);
+              },
+              child: Container(
+                width: 350,
+                height: 150,
+                color: Colors.white,
+                child: Center(
+                  child: Text('点击修改价格'),
+                ),
+              ),
+            ),
+          );
+        },
+      ));
+}
 
+void _onRouteTextToast(Action action, Context<EntranceState> ctx) {
+  TextEditingController textController = TextEditingController();
+
+  Navigator.pushReplacement(
+      ctx.context,
+      PageRouteBuilder(
+          opaque: false,
+          pageBuilder: (BuildContext context, _, __) {
+            return Center(
+              child: Container(
+                width: 350,
+                height: 400,
+                child: Material(
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: textController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: '原本价格为${action.payload['price']}',
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: GestureDetector(
+                              child: Text('取消'),
+                              onTap: () => Navigator.of(ctx.context).pop(),
+                            ),
+                          ),
+                          Container(
+                            child: GestureDetector(
+                              child: Text('修改'),
+                              onTap: () {
+                                Navigator.of(ctx.context).pop();
+                                ctx.dispatch(EntranceActionCreator.onEditPrice(
+                                    action.payload['id'],
+                                    int.parse(textController.text)));
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }));
 }
 
 //弹窗
@@ -81,6 +153,7 @@ void _showToast(Action action, Context<EntranceState> ctx) async {
       });
 }
 
+//弹窗修改
 void _showTextToast(Action action, Context<EntranceState> ctx) async {
   TextEditingController usernameController = TextEditingController();
 
@@ -106,7 +179,9 @@ void _showTextToast(Action action, Context<EntranceState> ctx) async {
                 child: Text('修改'),
                 onTap: () {
                   Navigator.of(ctx.context).pop();
-                  ctx.dispatch(EntranceActionCreator.onEditPrice(action.payload['id'], int.parse(usernameController.text)));
+                  ctx.dispatch(EntranceActionCreator.onEditPrice(
+                      action.payload['id'],
+                      int.parse(usernameController.text)));
                 },
               ),
             ),
