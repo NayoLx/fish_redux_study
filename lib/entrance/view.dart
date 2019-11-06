@@ -11,10 +11,10 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
       appBar: AppBar(
         title: TabBar(
           tabs: [
-            Tab(text: '美食'),
-            Tab(text: '美食'),
-            Tab(text: '美食'),
-            Tab(text: '美食'),
+            Tab(text: '美食1'),
+            Tab(text: '美食2'),
+            Tab(text: '美食3'),
+            Tab(text: '美食4'),
           ],
         ),
       ),
@@ -56,7 +56,12 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
                                                ),
                                              ),
                                            ),
-                                           new Text('￥${state.shopList[i]?.price}'),
+                                           new GestureDetector(
+                                             onTap: () {
+                                               dispatch(EntranceActionCreator.showToast(i, state.shopList[i]?.price));
+                                             },
+                                             child: new Text('￥${state.shopList[i]?.price}'),
+                                           )
                                          ],
                                        ),
                                        new Row(
@@ -130,7 +135,9 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
             },
             child: Icon(Icons.insert_drive_file),
           ),
-          Icon(Icons.calendar_view_day),
+          new GestureDetector(
+            child: Icon(Icons.calendar_view_day),
+          ),
           Icon(Icons.directions_bike),
         ],
       ),

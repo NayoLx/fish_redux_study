@@ -11,6 +11,9 @@ enum EntranceAction {
   onGetMoreData,
   onEditAction,
   toSecondPage,
+  showToast,
+  onEditPrice,
+  onRouteToast,
 }
 
 class EntranceActionCreator {
@@ -43,6 +46,24 @@ class EntranceActionCreator {
     return Action(EntranceAction.onEditAction, payload: toValue);
   }
 
+  //显示弹窗
+  static Action showToast(int id, int price) {
+    return Action(EntranceAction.showToast, payload: {'id': id, 'price': price});
+  }
+
+  //修改数据
+  static Action onEditPrice(int id, int price) {
+    return Action(EntranceAction.onEditPrice, payload: {'id': id, 'price': price});
+  }
+
+  //路由弹窗
+  static Action onRouteToast() {
+    return Action(EntranceAction.onRouteToast);
+  }
+
+
+
+  //页面跳转
   static Action toSecondPage() {
     return Action(EntranceAction.toSecondPage);
   }

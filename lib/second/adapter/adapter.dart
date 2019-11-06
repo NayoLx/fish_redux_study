@@ -22,5 +22,7 @@ class _SecondConnector extends ConnOp<SecondState, List<ItemBean>> {
   }
 
   @override
-  void set(SecondState state, List<ItemBean> items) {}
+  void set(SecondState state, List<ItemBean> items) {
+
+  }
 }

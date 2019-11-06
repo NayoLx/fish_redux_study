@@ -14,6 +14,7 @@ Reducer<EntranceState> buildReducer() {
       EntranceAction.loadData: _onLoadData, //接收loadData Action
       EntranceAction.onEditAction: _editAction,
       EntranceAction.onGetMoreData: _onGetMoreData,
+      EntranceAction.onEditPrice: _onEditPrice,
     },
   );
 }
@@ -44,3 +45,9 @@ EntranceState _onGetMoreData(EntranceState state, Action action) {
   return state.clone()..shopList = state.shopList;
 }
 
+EntranceState _onEditPrice(EntranceState state, Action action) {
+  if (action.payload != null && action.payload != []) {
+    state.shopList[action.payload['id']].price = action.payload['price'];    //数据更新
+    return state.clone()..shopList = state.shopList;                                         //重新clone一边
+  }
+}
