@@ -128,9 +128,9 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
             onTap: () {
               dispatch(EntranceActionCreator.toSecondPage());
             },
-            child: Icon(Icons.delete_sweep),
+            child: Icon(Icons.insert_drive_file),
           ),
-          Icon(Icons.directions_bike),
+          Icon(Icons.calendar_view_day),
           Icon(Icons.directions_bike),
         ],
       ),

@@ -4,6 +4,7 @@ import 'effect.dart';
 import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
+import 'adapter/adapter.dart';
 
 class SecondPage extends Page<SecondState,  Map<String, dynamic>> {
   SecondPage()
@@ -13,7 +14,7 @@ class SecondPage extends Page<SecondState,  Map<String, dynamic>> {
             reducer: buildReducer(),
             view: buildView,
             dependencies: Dependencies<SecondState>(
-                adapter: null,
+                adapter: NoneConn<SecondState>() + SecondAdapter(),
                 slots: <String, Dependent<SecondState>>{
                 }),
             middleware: <Middleware<SecondState>>[

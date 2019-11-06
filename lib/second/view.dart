@@ -7,18 +7,24 @@ import 'state.dart';
 
 // SecondActionCreator
 Widget buildView(SecondState state, Dispatch dispatch, ViewService viewService) {
-  final adapter = viewService.buildAdapter();
+  final ListAdapter adapter = viewService.buildAdapter();
   return Scaffold(
     appBar: AppBar(
       title: Text('List View学习'),
     ),
     body: Container(
-        child: RefreshIndicator(
-          child: ListView.builder(
-            itemBuilder: null,
-            itemCount: 0,
-          ),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child:  ListView.builder(
+                controller: state.controller,
+                itemBuilder: adapter.itemBuilder,
+                itemCount: adapter.itemCount,
+              ),
+            )
+          ],
         ),
+//    child: Text('Hello World'),
     ),
   );
 }
