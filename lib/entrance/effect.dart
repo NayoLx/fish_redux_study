@@ -22,7 +22,7 @@ Effect<EntranceState> buildEffect() {
   });
 }
 void _dispose(Action action, Context<EntranceState> ctx) {
-  (ctx.extra['eventBus'] as Function)();
+  (ctx.extra['eventBus'] as Function)();                                //销毁eventBus事件监听
 }
 
 void _onAction(Action action, Context<EntranceState> ctx) {}
@@ -201,11 +201,11 @@ void _showTextToast(Action action, Context<EntranceState> ctx) async {
 void _pageRouteBuild(Action action, Context<EntranceState> ctx) {
   StreamSubscription<PageEvent> eventBus;
 
-  eventBus = EventBusUtil.getInstance().on<PageEvent>().listen((data) {
+  eventBus = EventBusUtil.getInstance().on<PageEvent>().listen((data) {     //eventBus事件监听
     ctx.dispatch(EntranceActionCreator.editRouteBuild(data.test));
   });
 
-  ctx.extra['eventBus'] = eventBus;
+  ctx.extra['eventBus'] = eventBus;                                         //封装
 
   Navigator.of(ctx.context).push(PageRouteBuilder(
       opaque: false,

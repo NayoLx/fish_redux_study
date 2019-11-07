@@ -54,7 +54,6 @@ EntranceState _onEditPrice(EntranceState state, Action action) {
 }
 
 EntranceState _editRouteBuild(EntranceState state, Action action) {
-  print('_editRouteBuild: ${action.payload}');
   state.eventData = action.payload;
   return state.clone()..eventData = state.eventData;
 }
