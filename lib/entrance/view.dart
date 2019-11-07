@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import '../second/page.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -20,7 +19,7 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
       ),
       body: TabBarView(
         children: [
-           new GestureDetector (
+          GestureDetector (
              child: RefreshIndicator(
                  child: new ListView.builder(
                    controller: state.controller,
@@ -130,15 +129,20 @@ Widget buildView(EntranceState state, Dispatch dispatch, ViewService viewService
                  },
              ),
           ),
-          new GestureDetector(
+          GestureDetector(
             onTap: () {
               dispatch(EntranceActionCreator.toSecondPage());
             },
             child: Icon(Icons.insert_drive_file),
           ),
-          new GestureDetector(
-            child: Icon(Icons.calendar_view_day),
-          ),
+          Center(
+             child: GestureDetector(
+               onTap: () {
+                  dispatch(EntranceActionCreator.pageRouteBuild());
+               },
+               child: Text('${state.eventData}'),
+             ),
+           ),
           Icon(Icons.directions_bike),
         ],
       ),

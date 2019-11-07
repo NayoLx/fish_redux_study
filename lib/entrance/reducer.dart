@@ -15,6 +15,7 @@ Reducer<EntranceState> buildReducer() {
       EntranceAction.onEditAction: _editAction,
       EntranceAction.onGetMoreData: _onGetMoreData,
       EntranceAction.onEditPrice: _onEditPrice,
+      EntranceAction.editRouteBuild: _editRouteBuild,
     },
   );
 }
@@ -50,4 +51,10 @@ EntranceState _onEditPrice(EntranceState state, Action action) {
     state.shopList[action.payload['id']].price = action.payload['price'];    //数据更新
     return state.clone()..shopList = state.shopList;                                         //重新clone一边
   }
+}
+
+EntranceState _editRouteBuild(EntranceState state, Action action) {
+  print('_editRouteBuild: ${action.payload}');
+  state.eventData = action.payload;
+  return state.clone()..eventData = state.eventData;
 }

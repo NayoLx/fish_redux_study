@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'entrance/page.dart';
 import 'grid/page.dart';
 import 'second/page.dart';
+import 'three/page.dart';
+import 'four/page.dart';
 
 Widget CreateApp() {
   final AbstractRoutes routes = PageRoutes(
@@ -11,6 +13,8 @@ Widget CreateApp() {
       'entrance_page': EntrancePage(),
       'grid_page': GridPage(),
       'second_page': SecondPage(),
+      'three_page': threePage(),
+      'four_page': fourPage(),
     },
   );
 

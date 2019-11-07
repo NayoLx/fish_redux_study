@@ -5,12 +5,14 @@ import '../model.dart';
 class EntranceState implements Cloneable<EntranceState> {
   List<Model> shopList;
   ScrollController controller = new ScrollController();
+  String eventData;
 
   @override
   EntranceState clone() {
     return EntranceState()
       ..shopList = shopList
-      ..controller = controller;
+      ..controller = controller
+      ..eventData = eventData;
   }
 }
 

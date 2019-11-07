@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:flutter/material.dart' as prefix0;
+
+import '../three/page.dart';
+import '../event_bus.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -15,7 +17,12 @@ Effect<EntranceState> buildEffect() {
     EntranceAction.toSecondPage: _toSecondPage,
     EntranceAction.showToast: _showToast,
     EntranceAction.onRouteToast: _onRouteToast,
+    EntranceAction.pageRouteBuild: _pageRouteBuild,
+    Lifecycle.dispose: _dispose,
   });
+}
+void _dispose(Action action, Context<EntranceState> ctx) {
+  (ctx.extra['eventBus'] as Function)();
 }
 
 void _onAction(Action action, Context<EntranceState> ctx) {}
@@ -188,4 +195,33 @@ void _showTextToast(Action action, Context<EntranceState> ctx) async {
           ],
         );
       });
+}
+
+
+void _pageRouteBuild(Action action, Context<EntranceState> ctx) {
+  StreamSubscription<PageEvent> eventBus;
+
+  eventBus = EventBusUtil.getInstance().on<PageEvent>().listen((data) {
+    ctx.dispatch(EntranceActionCreator.editRouteBuild(data.test));
+  });
+
+  ctx.extra['eventBus'] = eventBus;
+
+  Navigator.of(ctx.context).push(PageRouteBuilder(
+      opaque: false,
+      pageBuilder: (BuildContext context, _, __) {
+        return Center(
+          child: Container(
+            width: 350,
+            height: 100,
+            decoration: new BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              border: new Border.all(width: 1, color: Colors.grey),
+            ),
+            child: threePage().buildPage(null),
+          ),
+        );
+      })
+  );
 }

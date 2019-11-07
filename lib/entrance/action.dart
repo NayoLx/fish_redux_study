@@ -14,6 +14,8 @@ enum EntranceAction {
   showToast,
   onEditPrice,
   onRouteToast,
+  pageRouteBuild,
+  editRouteBuild,
 }
 
 class EntranceActionCreator {
@@ -60,12 +62,21 @@ class EntranceActionCreator {
   static Action onRouteToast(int id, int price) {
     return Action(EntranceAction.onRouteToast,  payload: {'id': id, 'price': price});
   }
-
-
-
+  
   //页面跳转
   static Action toSecondPage() {
     return Action(EntranceAction.toSecondPage);
+  }
+
+
+  //popRoute页面路由实现
+  static Action pageRouteBuild() {
+    return Action(EntranceAction.pageRouteBuild);
+  }
+
+  static Action editRouteBuild(String test) {
+    return Action(EntranceAction.editRouteBuild, payload: test);
+
   }
 
 }
